@@ -9,7 +9,8 @@
 .main-body {
   display: flex;
   background-color: #ededed;
-  height: 90vh;
+  min-height: 90vh;
+  height: fit-content;
   width: 90vw;
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
 }
@@ -19,6 +20,12 @@
     height: 100vh;
     width: 100vw;
     box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (max-width : 992px) {
+  .main-body {
+    height: 100%;
   }
 }
 // -------------------------------------------------------------------

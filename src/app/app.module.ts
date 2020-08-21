@@ -1,3 +1,4 @@
+import { TaskComponent } from './components/main/list/list-item/task/task.component';
 import { MaterialModule } from './modules/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,9 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { MainComponent } from './components/main/main.component';
 import { ListComponent } from './components/main/list/list.component';
-import { TaskComponent } from './components/main/list/task/task.component';
 import { AddListComponent } from './components/main/list/add-list/add-list.component';
-import { AddTaskComponent } from './components/main/list/task/add-task/add-task.component';
+import { ListItemComponent } from './components/main/list/list-item/list-item.component';
+import { TaskItemComponent } from './components/main/list/list-item/task/task-item/task-item.component';
+import { AddTaskComponent } from './components/main/list/list-item/task/add-task/add-task.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,11 @@ import { AddTaskComponent } from './components/main/list/task/add-task/add-task.
     HeaderComponent,
     MainComponent,
     ListComponent,
-    TaskComponent,
     AddListComponent,
-    AddTaskComponent
+    ListItemComponent,
+    TaskComponent,
+    TaskItemComponent,
+    AddTaskComponent,
   ],
   imports: [
     BrowserModule,
