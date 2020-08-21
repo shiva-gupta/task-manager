@@ -8,14 +8,14 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
 
-  <div>
+  <div class="pr-0">
     <div class="row m-0 pt-1">
-      <div class="col-5 p-0"><b>Created</b></div>
-      <div class="col-7 p-0">21/08/2020</div>
+      <div class="col-4 p-0"><b>Created</b></div>
+      <div class="col-8 p-0">21/08/2020</div>
     </div>
-    <div class="row m-0 pt-3">
-      <div class="col-5 p-0"><b>ECD</b></div>
-      <div class="col-7 p-0">25/08/2020</div>
+    <div class="row m-0 pt-1">
+      <div class="col-4 p-0"><b>ECD</b></div>
+      <div class="col-8 p-0">25/08/2020</div>
     </div>
     <div class="row m-0 pt-3">
       <div class="p-0"><b>Description</b></div>
@@ -24,6 +24,20 @@
       <div class="p-0">
         Description of task describing what needs to be done.
       </div>
+    </div>
+    <div class="row m-0 mt-2 pull-right" *ngIf="display">
+      <button mat-raised-button (click)="display = !display">
+        Edit
+      </button>
+    </div>
+    <div class="row m-0 mt-2 pull-right" *ngIf="!display">
+      <button mat-raised-button>
+        Save
+      </button>
+      &nbsp;
+      <button mat-raised-button (click)="display = !display">
+        Cancel
+      </button>
     </div>
   </div>
 </mat-expansion-panel>
