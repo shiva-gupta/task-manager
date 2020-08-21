@@ -1,4 +1,6 @@
+import { AddListDialogComponent } from './add-list-dialog/add-list-dialog.component';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-list',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog(): void {
+    this.dialog.open(
+      AddListDialogComponent,
+      {
+        height: 'fit-content',
+        width: 'fit-content'
+      })
+    .afterClosed().subscribe(
+      (res: any) => {
+        console.log(res);
+      }
+    );
   }
 
 }

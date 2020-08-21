@@ -1,0 +1,23 @@
+<form class="div-add-list">
+  <mat-form-field hideRequiredMarker>
+    <mat-label>List Name</mat-label>
+    <input
+      matInput
+      required
+      [formControl]="nameControl"
+      [errorStateMatcher]="matcher"
+      [(ngModel)]="name"
+      name="name"
+      placeholder="Ex. To Do"
+      >
+  </mat-form-field>
+  <div class="pull-right">
+    <button mat-raised-button (click)="createList()" [disabled]="!nameControl.valid">
+      Create
+    </button>
+    &nbsp;
+    <button mat-raised-button (click)="closeDialog()">
+      Cancel
+    </button>
+  </div>
+</form>

@@ -14,6 +14,8 @@ import { AddListComponent } from './components/main/list/add-list/add-list.compo
 import { ListItemComponent } from './components/main/list/list-item/list-item.component';
 import { TaskItemComponent } from './components/main/list/list-item/task/task-item/task-item.component';
 import { AddTaskComponent } from './components/main/list/list-item/task/add-task/add-task.component';
+import { AddListDialogComponent } from './components/main/list/add-list/add-list-dialog/add-list-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { AddTaskComponent } from './components/main/list/list-item/task/add-task
     TaskComponent,
     TaskItemComponent,
     AddTaskComponent,
+    AddListDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,8 @@ import { AddTaskComponent } from './components/main/list/list-item/task/add-task
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
