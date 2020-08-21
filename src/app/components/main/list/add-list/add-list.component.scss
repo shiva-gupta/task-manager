@@ -1,0 +1,13 @@
+.btn-add-list {
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+}
+
+@media (max-width : 768px) {
+  .btn-add-list {
+    bottom: 5%;
+    right: 5%;
+  }
+}
+

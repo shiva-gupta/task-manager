@@ -1,0 +1,28 @@
+// -------------------------------------------------------------------
+.main {
+  display: grid;
+  place-items: center;
+  background-color: #dadbd3;
+  height: 100vh;
+}
+
+.main-body {
+  display: flex;
+  background-color: #ededed;
+  height: 90vh;
+  width: 90vw;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width : 768px) {
+  .main-body {
+    height: 100vh;
+    width: 100vw;
+    box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
+  }
+}
+// -------------------------------------------------------------------
+
+.div-header {
+  width: 100%;
+}
