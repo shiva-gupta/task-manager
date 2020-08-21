@@ -1,0 +1,10 @@
+// https://material-ui.com/customization/color/
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-primary: mat-palette($mat-light-blue, A200);
+$my-accent:  mat-palette($mat-orange, 500);
+$my-warn:    mat-palette($mat-red, 600);
+
+$my-theme: mat-light-theme($my-primary, $my-accent, $my-warn);
+@include angular-material-theme($my-theme);

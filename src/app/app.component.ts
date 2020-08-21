@@ -8,3 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'task-management';
 }
+
+// "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+// https://material.io/design/color/the-color-system.html
