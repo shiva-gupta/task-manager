@@ -1,3 +1,4 @@
+import { TaskService } from './../../../../../../services/shared/task.service';
 import { Task } from './../../../../../../models/task';
 import { EventEmitterService } from './../../../../../../services/shared/event-emitter.service';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +14,7 @@ import { CustomErrorStateMatcherService } from 'src/app/services/forms/custom-er
 })
 export class AddTaskDialogComponent implements OnInit {
 
-  task = new Task('', new Date(), new Date(), '', 0);
+  task = new Task('', new Date(), new Date(), '', 1);
   titleControl = new FormControl('', [
     Validators.required
   ]);
@@ -27,6 +28,7 @@ export class AddTaskDialogComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private eventEmitter: EventEmitterService,
+    private taskService: TaskService,
     public matcher: CustomErrorStateMatcherService,
     private dialogRef: MatDialogRef<AddTaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -49,16 +51,18 @@ export class AddTaskDialogComponent implements OnInit {
   }
 
   addTask(): void {
-    console.log(this.task);
-    // if (this.listService.deleteById(this.data.list.id)) {
-    //   this.eventEmitter.emitListDelete(this.data.list);
-    //   this.toastr.success('Deleted Successfully');
-    //   this.dialogRef.close();
-    // }
+    this.data.list = this.taskService.save(this.data.list, this.task);
+    this.toastr.success('Task Added Successfully');
+    this.eventEmitter.emitTaskAdd(this.data.list);
+    this.dialogRef.close();
   }
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  dateFilter = (date: Date) => {
+    return date > new Date();
   }
 
 }

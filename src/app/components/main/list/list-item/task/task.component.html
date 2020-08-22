@@ -1,5 +1,3 @@
-<!-- <app-task-item></app-task-item> -->
-<mat-accordion>
-  <app-task-item></app-task-item>
-  <app-task-item></app-task-item>
+<mat-accordion *ngFor="let task of list.tasks">
+  <app-task-item [task]="task"></app-task-item>
 </mat-accordion>

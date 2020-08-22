@@ -1,28 +1,28 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      Task-1
+      {{ task.title }}
     </mat-panel-title>
     <mat-panel-description>
-      21/08/2020
+      {{ getCreated() }}
     </mat-panel-description>
   </mat-expansion-panel-header>
 
   <div class="pr-0">
     <div class="row m-0 pt-1">
       <div class="col-4 p-0"><b>Created</b></div>
-      <div class="col-8 p-0">21/08/2020</div>
+      <div class="col-8 p-0">{{ getCreated() }}</div>
     </div>
     <div class="row m-0 pt-1">
       <div class="col-4 p-0"><b>ECD</b></div>
-      <div class="col-8 p-0">25/08/2020</div>
+      <div class="col-8 p-0">{{ getEcd() }}</div>
     </div>
     <div class="row m-0 pt-3">
       <div class="p-0"><b>Description</b></div>
     </div>
     <div class="row m-0">
       <div class="p-0">
-        Description of task describing what needs to be done.
+        {{ task.description }}
       </div>
     </div>
     <div class="row m-0 mt-2 pull-right" *ngIf="display">

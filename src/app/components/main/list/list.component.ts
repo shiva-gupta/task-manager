@@ -33,6 +33,14 @@ export class ListComponent implements OnInit {
     this.eventEmitter.listDelete.subscribe((list: List) => {
       this.lists = this.lists.filter(l => l.id !== list.id);
     });
+
+    this.eventEmitter.taskAdd.subscribe((list: List) => {
+      this.lists.forEach(l => {
+        if (l.id === list.id) {
+          l.tasks = list.tasks;
+        }
+      });
+    });
   }
 
   findAllList(): void {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { List } from 'src/app/models/list';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
+
+  @Input() list: List;
 
   constructor() { }
 
