@@ -1,18 +1,17 @@
 <form class="div-add-list">
+  <h3>Add New List</h3>
   <mat-form-field hideRequiredMarker>
-    <mat-label>List Name</mat-label>
+    <mat-label>List Title</mat-label>
     <input
       matInput
       required
-      [formControl]="nameControl"
+      [formControl]="titleControl"
       [errorStateMatcher]="matcher"
-      [(ngModel)]="name"
-      name="name"
       placeholder="Ex. To Do"
       >
   </mat-form-field>
   <div class="pull-right">
-    <button mat-raised-button (click)="createList()" [disabled]="!nameControl.valid">
+    <button mat-raised-button (click)="createList()" [disabled]="!titleControl.valid">
       Create
     </button>
     &nbsp;

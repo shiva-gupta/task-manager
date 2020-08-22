@@ -25,7 +25,7 @@ export class AddListComponent implements OnInit {
       })
     .afterClosed().subscribe(
       (res: any) => {
-        console.log(res);
+
       }
     );
   }

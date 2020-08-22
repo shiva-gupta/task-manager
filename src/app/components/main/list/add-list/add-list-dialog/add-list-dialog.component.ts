@@ -1,6 +1,9 @@
+import { List } from './../../../../../models/list';
+import { ListService } from '../../../../../services/shared/list.service';
 import { CustomErrorStateMatcherService } from './../../../../../services/forms/custom-error-state-matcher.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -10,17 +13,22 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class AddListDialogComponent implements OnInit {
 
-  name = '';
-  nameControl = new FormControl('', [
+  list: List = new List();
+  titleControl = new FormControl('', [
     Validators.required
   ]);
 
   constructor(
     private dialogRef: MatDialogRef<AddListDialogComponent>,
-    public matcher: CustomErrorStateMatcherService
+    public matcher: CustomErrorStateMatcherService,
+    private toastr: ToastrService,
+    private listService: ListService
   ) { }
 
   ngOnInit(): void {
+    this.titleControl.valueChanges.subscribe(title => {
+      this.list.title = title;
+    });
   }
 
   closeDialog(): void {
@@ -28,7 +36,12 @@ export class AddListDialogComponent implements OnInit {
   }
 
   createList(): void {
-
+    if (this.listService.save(this.list)) {
+      this.toastr.success('New List Added');
+      this.closeDialog();
+    } else {
+      this.toastr.error('Duplicate title');
+    }
   }
 
 }
