@@ -50,7 +50,8 @@ export class ListService {
   save(list: List): List {
     const lists = this.findAll();
     if (lists === null || lists.length === 0) {
-      this.saveLists([new List(1, list.title)]);
+      list.id = 1;
+      this.saveLists([list]);
     } else {
       if (this.isPresent(list, lists)) {
         return list;

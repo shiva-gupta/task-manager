@@ -28,8 +28,8 @@ export class AddListDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleControl.valueChanges.subscribe(title => {
-      this.list.title = title;
+    this.titleControl.valueChanges.subscribe((title: string) => {
+      this.list.title = title.trim();
     });
   }
 
@@ -40,7 +40,7 @@ export class AddListDialogComponent implements OnInit {
   createList(): void {
     this.list = this.listService.save(this.list);
 
-    if (this.list.id !== undefined || this.list.id !== null) {
+    if (this.list.id !== undefined) {
       this.toastr.success('New List Added');
       this.eventEmitter.emitListAdd(this.list);
       this.closeDialog();

@@ -2,6 +2,7 @@ import { EventEmitterService } from './../../../services/shared/event-emitter.se
 import { ListService } from './../../../services/shared/list.service';
 import { Component, OnInit } from '@angular/core';
 import { List } from 'src/app/models/list';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +15,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private listService: ListService,
-    private eventEmitter: EventEmitterService
+    private eventEmitter: EventEmitterService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -35,5 +37,8 @@ export class ListComponent implements OnInit {
 
   findAllList(): void {
     this.lists = this.listService.findAll();
+    if (this.lists.length === 0) {
+      this.snackBar.open('Add Your First List', 'Ok', {duration: 5000});
+    }
   }
 }
