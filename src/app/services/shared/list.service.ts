@@ -19,8 +19,11 @@ export class ListService {
     this.env.storage.removeItem(Constant.KEY_LIST);
   }
 
-  deleteById(id: number): void {
-
+  deleteById(id: number): boolean {
+    this.saveLists(
+      this.findAll().filter(l => l.id !== id)
+    );
+    return true;
   }
 
   findAll(): Array<List> {
@@ -45,22 +48,24 @@ export class ListService {
   }
 
   save(list: List): boolean {
-    let lists = this.findAll();
+    const lists = this.findAll();
     if (lists === null || lists.length === 0) {
-      this.env.storage.setItem(
-        Constant.KEY_LIST,
-        JSON.stringify([new List(1, list.title)])
-      );
+      this.saveLists([new List(1, list.title)]);
     } else {
       if (this.isPresent(list, lists)) {
         return false;
       }
       // calculate latest primary key
       const id = lists[lists.length - 1].id + 1;
-      lists = [...lists, new List(id, list.title)];
-      this.env.storage.setItem(Constant.KEY_LIST, this.toString(lists));
+      this.saveLists(
+        [...lists, new List(id, list.title)]
+      );
     }
     return true;
+  }
+
+  saveLists(lists: Array<List>): void {
+    this.env.storage.setItem(Constant.KEY_LIST, this.toString(lists));
   }
 
   toString(obj: any): string {

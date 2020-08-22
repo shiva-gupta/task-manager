@@ -1,4 +1,6 @@
+import { ListService } from './../../../services/shared/list.service';
 import { Component, OnInit } from '@angular/core';
+import { List } from 'src/app/models/list';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  lists: Array<List>;
+
+  constructor(
+    private listService: ListService
+  ) { }
 
   ngOnInit(): void {
+    this.findAllList();
   }
 
+  findAllList(): void {
+    this.lists = this.listService.findAll();
+  }
 }
