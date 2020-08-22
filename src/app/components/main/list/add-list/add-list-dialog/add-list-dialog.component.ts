@@ -1,3 +1,4 @@
+import { EventEmitterService } from './../../../../../services/shared/event-emitter.service';
 import { List } from './../../../../../models/list';
 import { ListService } from '../../../../../services/shared/list.service';
 import { CustomErrorStateMatcherService } from './../../../../../services/forms/custom-error-state-matcher.service';
@@ -22,7 +23,8 @@ export class AddListDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<AddListDialogComponent>,
     public matcher: CustomErrorStateMatcherService,
     private toastr: ToastrService,
-    private listService: ListService
+    private listService: ListService,
+    private eventEmitter: EventEmitterService
   ) { }
 
   ngOnInit(): void {
@@ -36,8 +38,11 @@ export class AddListDialogComponent implements OnInit {
   }
 
   createList(): void {
-    if (this.listService.save(this.list)) {
+    this.list = this.listService.save(this.list);
+
+    if (this.list.id !== undefined || this.list.id !== null) {
       this.toastr.success('New List Added');
+      this.eventEmitter.emitListAdd(this.list);
       this.closeDialog();
     } else {
       this.toastr.error('Duplicate title');

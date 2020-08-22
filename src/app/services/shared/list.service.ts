@@ -47,21 +47,21 @@ export class ListService {
     return false;
   }
 
-  save(list: List): boolean {
+  save(list: List): List {
     const lists = this.findAll();
     if (lists === null || lists.length === 0) {
       this.saveLists([new List(1, list.title)]);
     } else {
       if (this.isPresent(list, lists)) {
-        return false;
+        return list;
       }
       // calculate latest primary key
-      const id = lists[lists.length - 1].id + 1;
+      list.id = lists[lists.length - 1].id + 1;
       this.saveLists(
-        [...lists, new List(id, list.title)]
+        [...lists, list]
       );
     }
-    return true;
+    return list;
   }
 
   saveLists(lists: Array<List>): void {

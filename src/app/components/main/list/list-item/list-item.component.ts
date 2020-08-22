@@ -1,7 +1,7 @@
-import { ToastrService } from 'ngx-toastr';
-import { ListService } from './../../../../services/shared/list.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { DeleteListItemDialogComponent } from './delete-list-item-dialog/delete-list-item-dialog.component';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { List } from 'src/app/models/list';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list-item',
@@ -13,17 +13,27 @@ export class ListItemComponent implements OnInit {
   @Input() list: List;
 
   constructor(
-    private listService: ListService,
-    private toastr: ToastrService
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
   }
 
-  deleteList(): void {
-    if (this.listService.deleteById(this.list.id)) {
-      this.toastr.success('Deleted Successfully');
-    }
+  openDialog(): void {
+    this.dialog.open(
+      DeleteListItemDialogComponent,
+      {
+        height: 'fit-content',
+        width: 'fit-content',
+        data: {
+          list: this.list
+        }
+      })
+    .afterClosed().subscribe(
+      (res: any) => {
+
+      }
+    );
   }
 
 }

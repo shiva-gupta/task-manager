@@ -19,6 +19,7 @@ import { AddTaskComponent } from './components/main/list/list-item/task/add-task
 import { AddListDialogComponent } from './components/main/list/add-list/add-list-dialog/add-list-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DeleteListItemDialogComponent } from './components/main/list/list-item/delete-list-item-dialog/delete-list-item-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     TaskItemComponent,
     AddTaskComponent,
     AddListDialogComponent,
+    DeleteListItemDialogComponent,
   ],
   imports: [
     BrowserModule,
