@@ -2,7 +2,6 @@ import { Constant } from './constant';
 import { List } from '../../models/list';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { EnvService } from '../env/env.service';
 
 @Injectable({

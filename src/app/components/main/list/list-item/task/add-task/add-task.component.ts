@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { List } from 'src/app/models/list';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component';
 
 @Component({
   selector: 'app-add-task',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTaskComponent implements OnInit {
 
-  constructor() { }
+  @Input() list: List;
+
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog(): void {
+    this.dialog.open(
+      AddTaskDialogComponent,
+      {
+        height: 'fit-content',
+        width: 'fit-content',
+        data: {
+          list: this.list
+        }
+      })
+    .afterClosed().subscribe(
+      (res: any) => {
+
+      }
+    );
   }
 
 }

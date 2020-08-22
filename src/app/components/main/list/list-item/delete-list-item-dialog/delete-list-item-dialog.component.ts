@@ -1,4 +1,3 @@
-import { List } from './../../../../../models/list';
 import { EventEmitterService } from './../../../../../services/shared/event-emitter.service';
 import { ListService } from './../../../../../services/shared/list.service';
 import { ToastrService } from 'ngx-toastr';

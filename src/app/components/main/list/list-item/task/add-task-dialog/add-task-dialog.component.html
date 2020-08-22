@@ -1,0 +1,34 @@
+<form>
+  <h3>Add New Task</h3>
+
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Task Title</mat-label>
+    <input matInput required [formControl]="titleControl"
+      [errorStateMatcher]="matcher">
+  </mat-form-field>
+
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Estimated Completion Date</mat-label>
+    <input matInput required [matDatepicker]="myDatePicker"
+      [readonly]="true" [formControl]="ecdControl">
+    <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #myDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field hideRequiredMarker>
+    <mat-label>Task Description</mat-label>
+    <input matInput required [formControl]="descriptionControl"
+      [errorStateMatcher]="matcher">
+  </mat-form-field>
+
+  <div class="pull-right">
+    <button mat-raised-button (click)="addTask()"
+      [disabled]="!titleControl.valid || !ecdControl.valid || !descriptionControl.valid">
+      Add
+    </button>
+    &nbsp;
+    <button mat-raised-button (click)="closeDialog()">
+      Cancel
+    </button>
+  </div>
+</form>
