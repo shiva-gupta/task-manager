@@ -1,3 +1,5 @@
-<mat-accordion *ngFor="let task of list.tasks">
-  <app-task-item [task]="task"></app-task-item>
+<mat-accordion>
+  <div *ngFor="let task of list.tasks">
+    <app-task-item [task]="task"></app-task-item>
+  </div>
 </mat-accordion>
