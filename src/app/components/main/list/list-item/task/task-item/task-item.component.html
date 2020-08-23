@@ -15,7 +15,8 @@
         <mat-form-field appearance="fill" class="status">
           <mat-label>Status</mat-label>
           <mat-select [(ngModel)]="selectedStatus"
-            (selectionChange)="onStatusChange()">
+            (selectionChange)="onStatusChange()"
+            [disabled]="display">
             <mat-option *ngFor="let status of statusList" [value]="status.value">
               {{status.field}}
             </mat-option>
@@ -23,22 +24,50 @@
         </mat-form-field>
       </div>
     </div>
+
     <div class="row m-0 pt-1">
       <div class="col-4 p-0"><b>Created</b></div>
       <div class="col-8 p-0">{{ getCreated() }}</div>
     </div>
-    <div class="row m-0 pt-1">
+
+    <div class="row m-0 pt-1" *ngIf="display">
       <div class="col-4 p-0"><b>ECD</b></div>
-      <div class="col-8 p-0">{{ getEcd() }}</div>
+      <div class="col-8 p-0">
+        {{ getEcd() }}
+      </div>
     </div>
+    <div class="row m-0 pt-1" *ngIf="!display">
+      <div class="col-4 p-0 pt-3"><b>ECD</b></div>
+      <div class="col-8 p-0">
+        <mat-form-field hideRequiredMarker>
+          <input matInput required [matDatepicker]="myDatePicker"
+            [matDatepickerFilter]="dateFilter"
+            [readonly]="true" [formControl]="ecdControl"
+            [(ngModel)]="ecd">
+
+          <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #myDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
     <div class="row m-0 pt-3">
       <div class="p-0"><b>Description</b></div>
     </div>
-    <div class="row m-0">
+    <div class="row m-0" *ngIf="display">
       <div class="p-0">
         {{ task.description }}
       </div>
     </div>
+    <div class="row m-0" *ngIf="!display">
+      <div class="p-0" style="width: 100%;">
+        <mat-form-field hideRequiredMarker>
+          <input matInput required [formControl]="descriptionControl"
+            [errorStateMatcher]="matcher" [(ngModel)]="description">
+        </mat-form-field>
+      </div>
+    </div>
+
     <div class="row m-0 mt-2 pull-right" *ngIf="display">
       <button mat-raised-button (click)="display = !display">
         Edit
@@ -49,11 +78,11 @@
       </button>
     </div>
     <div class="row m-0 mt-2 pull-right" *ngIf="!display">
-      <button mat-raised-button>
+      <button mat-raised-button (click)="update()" [disabled]="!descriptionControl.valid">
         Save
       </button>
       &nbsp;
-      <button mat-raised-button (click)="display = !display">
+      <button mat-raised-button (click)="cancelEdit()">
         Cancel
       </button>
     </div>

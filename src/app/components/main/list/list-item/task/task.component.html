@@ -8,5 +8,8 @@
     <div *ngFor="let task of list.tasks" cdkDrag>
       <app-task-item [task]="task"></app-task-item>
     </div>
+    <div *ngIf="list.tasks.length===0">
+      <p>Add New Task ...</p>
+    </div>
   </mat-accordion>
 </div>

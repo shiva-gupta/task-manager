@@ -7,6 +7,8 @@ import { Task } from './../../../../../../models/task';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl, Validators } from '@angular/forms';
+import { CustomErrorStateMatcherService } from 'src/app/services/forms/custom-error-state-matcher.service';
 
 @Component({
   selector: 'app-task-item',
@@ -21,14 +23,26 @@ export class TaskItemComponent implements OnInit, OnChanges {
   statusList: Array<Status> = this.getStatusList();
   selectedStatus: string;
 
+  ecd: Date;
+  description: string;
+  ecdControl = new FormControl('', [
+    Validators.required
+  ]);
+  descriptionControl = new FormControl('', [
+    Validators.required
+  ]);
+
   constructor(
     private dialog: MatDialog,
     private listSetvice: ListService,
     private taskService: TaskService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public matcher: CustomErrorStateMatcherService
   ) { }
 
   ngOnInit(): void {
+    this.ecd = this.task.ecd;
+    this.description = this.task.description;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -69,8 +83,32 @@ export class TaskItemComponent implements OnInit, OnChanges {
   }
 
   onStatusChange(): void {
-    this.taskService.changeStatus(this.task, this.selectedStatus);
-    this.toastr.success('Status Changed');
+    // this.taskService.changeStatus(this.task, this.selectedStatus);
+    // this.toastr.success('Status Changed');
+  }
+
+  dateFilter = (date: Date) => {
+    return date > new Date();
+  }
+
+  cancelEdit(): void {
+    this.display = !this.display;
+    this.ecd = this.task.ecd;
+    this.selectedStatus = this.task.status;
+    this.description = this.task.description;
+  }
+
+  update(): void {
+    if (this.description !== this.task.description
+      || this.ecd !== this.task.ecd
+      || this.selectedStatus !== this.task.status) {
+
+      this.task.description = this.description;
+      this.task.ecd = this.ecd;
+      this.taskService.changeStatus(this.task, this.selectedStatus);
+      this.toastr.success('Updated Successfully');
+    }
+    this.display = !this.display;
   }
 
 }
