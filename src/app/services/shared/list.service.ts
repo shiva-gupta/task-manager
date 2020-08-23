@@ -41,7 +41,7 @@ export class ListService {
     if (list.id !== undefined) {
       return arr.filter(l => l.id === list.id).length > 0 ? true : false;
     }else if (list.title !== undefined || list.title !== null) {
-      return arr.filter(l => l.title === list.title).length > 0 ? true : false;
+      return arr.filter(l => l.title.toLocaleLowerCase() === list.title.toLocaleLowerCase()).length > 0 ? true : false;
     }
     return false;
   }
