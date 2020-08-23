@@ -10,6 +10,20 @@
 
   <div class="pr-0">
     <div class="row m-0 pt-1">
+      <div class="col-4 p-0 pt-3"><b>Status</b></div>
+      <div class="col-8 p-0">
+        <mat-form-field appearance="fill" class="status">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="selectedStatus"
+            (selectionChange)="onStatusChange()">
+            <mat-option *ngFor="let status of statusList" [value]="status.value">
+              {{status.field}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row m-0 pt-1">
       <div class="col-4 p-0"><b>Created</b></div>
       <div class="col-8 p-0">{{ getCreated() }}</div>
     </div>

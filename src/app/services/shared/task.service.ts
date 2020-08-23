@@ -1,3 +1,4 @@
+import { EventEmitterService } from './event-emitter.service';
 import { ListService } from './list.service';
 import { Task } from './../../models/task';
 import { List } from 'src/app/models/list';
@@ -13,7 +14,8 @@ export class TaskService {
   constructor(
     private http: HttpClient,
     private env: EnvService,
-    private listService: ListService
+    private listService: ListService,
+    private eventEmitter: EventEmitterService
   ) { }
 
   save(list: List, task: Task): List {
@@ -48,6 +50,19 @@ export class TaskService {
     this.listService.saveLists(lists);
 
     return resultList;
+  }
+
+  changeStatus(task: Task, newStatus: string): void {
+    // delete task from current list
+    this.eventEmitter.emitTaskDelete(this.deleteTask(task));
+
+    // add task to new list
+    this.eventEmitter.emitTaskAdd(
+      this.save(
+        this.listService.findAll().filter(list => list.title === newStatus)[0],
+        task
+      )
+    );
   }
 
   toString(obj: any): string {
