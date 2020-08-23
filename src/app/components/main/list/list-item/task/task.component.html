@@ -1,5 +1,11 @@
-<mat-accordion>
-  <div *ngFor="let task of list.tasks">
-    <app-task-item [task]="task"></app-task-item>
-  </div>
-</mat-accordion>
+<div
+  cdkDropList
+  [cdkDropListData]="list.tasks"
+  class="example-list"
+  (cdkDropListDropped)="drop($event)">
+  <mat-accordion>
+    <div *ngFor="let task of list.tasks" cdkDrag>
+      <app-task-item [task]="task"></app-task-item>
+    </div>
+  </mat-accordion>
+</div>

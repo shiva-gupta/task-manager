@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -17,6 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 
 const material = [
+  DragDropModule,
   MatButtonModule,
   MatIconModule,
   MatBadgeModule,
