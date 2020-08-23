@@ -42,8 +42,6 @@ export class TaskComponent implements OnInit {
     const task: Task = JSON.parse(
       this.commonService.toString(event.container.data[order - 1])
     );
-    task.status = newStatus;
-    task.order = order;
 
     this.taskService.changeStatus(task, newStatus, order);
   }

@@ -53,7 +53,6 @@ export class TaskService {
   }
 
   changeStatus(task: Task, newStatus: string, order: number = 0): void {
-    console.log(task);
     if (order === 0) {
       // delete task from current list
       this.eventEmitter.emitTaskDelete(this.deleteTask(task));
@@ -66,10 +65,12 @@ export class TaskService {
         )
       );
     } else {
-      // delete task from current list
+      // // delete task from current list
       this.eventEmitter.emitTaskDelete(this.deleteTask(task));
 
-      // add task to new list
+      // // add task to new list
+      task.status = newStatus;
+      task.order = order;
       let lists = this.listService.findAll();
       let list = lists.filter(l => l.title === newStatus)[0];
       const updatedList: List = new List(list.id, list.title, []);
