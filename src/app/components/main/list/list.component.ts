@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListComponent implements OnInit {
 
-  lists: Array<List>;
+  lists: Array<List> = [];
 
   constructor(
     private listService: ListService,
