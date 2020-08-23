@@ -52,17 +52,68 @@ export class TaskService {
     return resultList;
   }
 
-  changeStatus(task: Task, newStatus: string): void {
-    // delete task from current list
-    this.eventEmitter.emitTaskDelete(this.deleteTask(task));
+  changeStatus(task: Task, newStatus: string, order: number = 0): void {
+    console.log(task);
+    if (order === 0) {
+      // delete task from current list
+      this.eventEmitter.emitTaskDelete(this.deleteTask(task));
 
-    // add task to new list
-    this.eventEmitter.emitTaskAdd(
-      this.save(
-        this.listService.findAll().filter(list => list.title === newStatus)[0],
-        task
-      )
-    );
+      // add task to new list
+      this.eventEmitter.emitTaskAdd(
+        this.save(
+          this.listService.findAll().filter(list => list.title === newStatus)[0],
+          task
+        )
+      );
+    } else {
+      // delete task from current list
+      this.eventEmitter.emitTaskDelete(this.deleteTask(task));
+
+      // add task to new list
+      let lists = this.listService.findAll();
+      let list = lists.filter(l => l.title === newStatus)[0];
+      const updatedList: List = new List(list.id, list.title, []);
+
+      switch (order) {
+        case 1: // first position
+          updatedList.tasks = [task, ...this.assignOrders(list, 2).tasks];
+          break;
+        case list.tasks.length + 1:  // last position
+          updatedList.tasks = [...this.assignOrders(list, 1).tasks, task];
+          break;
+        default:  // middle position
+          for (let i = 0; i < order - 1; i++) {
+            const t = list.tasks[i];
+            t.order = i + 1;
+            updatedList.tasks = [...updatedList.tasks, t];
+          }
+          updatedList.tasks = [...updatedList.tasks, task];
+          for (let i = order - 1; i < list.tasks.length; i++) {
+            const t = list.tasks[i];
+            t.order =  i + 2;
+            updatedList.tasks = [...updatedList.tasks, t];
+          }
+      }
+
+      lists = lists.map(l => {
+        if (l.title === updatedList.title) {
+          l = updatedList;
+          this.eventEmitter.emitTaskAdd(l);
+        }
+        return l;
+      });
+      this.listService.saveLists(lists);
+    }
+  }
+
+  assignOrders(list: List, initial: number): List {
+    list.tasks = list.tasks.map(task => {
+      task.order = initial;
+      initial += 1;
+      return task;
+    });
+
+    return list;
   }
 
   toString(obj: any): string {

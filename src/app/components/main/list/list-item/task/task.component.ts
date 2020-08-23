@@ -1,3 +1,4 @@
+import { TaskService } from './../../../../../services/shared/task.service';
 import { CommonService } from './../../../../../services/shared/common.service';
 import { Task } from './../../../../../models/task';
 import { List } from 'src/app/models/list';
@@ -14,7 +15,8 @@ export class TaskComponent implements OnInit {
   @Input() list: List;
 
   constructor(
-    private commonService: CommonService
+    private commonService: CommonService,
+    private taskService: TaskService
   ) { }
 
   ngOnInit(): void {
@@ -30,11 +32,20 @@ export class TaskComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
+    this.changeStatus(event);
+  }
+
+  changeStatus(event: CdkDragDrop<string[]>): void {
     const newStatus = event.container.id;
     const order = event.currentIndex + 1;
+
     const task: Task = JSON.parse(
       this.commonService.toString(event.container.data[order - 1])
     );
+    task.status = newStatus;
+    task.order = order;
+
+    this.taskService.changeStatus(task, newStatus, order);
   }
 
 }
