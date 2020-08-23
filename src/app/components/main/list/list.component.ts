@@ -52,7 +52,7 @@ export class ListComponent implements OnInit {
 
   findAllList(): void {
     this.lists = this.listService.findAll();
-    if (this.lists.length === 0) {
+    if (this.lists != null && this.lists.length === 0) {
       this.snackBar.open('Add Your First List', 'Ok', {duration: 5000});
     }
   }
