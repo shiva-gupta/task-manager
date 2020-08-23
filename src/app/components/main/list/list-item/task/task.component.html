@@ -2,7 +2,8 @@
   cdkDropList
   [cdkDropListData]="list.tasks"
   class="example-list"
-  (cdkDropListDropped)="drop($event)">
+  (cdkDropListDropped)="drop($event)"
+  [id]="list.title">
   <mat-accordion>
     <div *ngFor="let task of list.tasks" cdkDrag>
       <app-task-item [task]="task"></app-task-item>

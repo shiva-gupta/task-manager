@@ -1,3 +1,5 @@
+import { CommonService } from './../../../../../services/shared/common.service';
+import { Task } from './../../../../../models/task';
 import { List } from 'src/app/models/list';
 import { Component, OnInit, Input } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
@@ -11,9 +13,12 @@ export class TaskComponent implements OnInit {
 
   @Input() list: List;
 
-  constructor() { }
+  constructor(
+    private commonService: CommonService
+  ) { }
 
   ngOnInit(): void {
+
   }
 
   drop(event: CdkDragDrop<string[]>): void {
@@ -25,6 +30,11 @@ export class TaskComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
+    const newStatus = event.container.id;
+    const order = event.currentIndex + 1;
+    const task: Task = JSON.parse(
+      this.commonService.toString(event.container.data[order - 1])
+    );
   }
 
 }

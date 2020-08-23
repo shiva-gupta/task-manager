@@ -23,7 +23,6 @@ export class DeleteTaskItemDialogComponent implements OnInit {
   }
 
   delete(): void {
-    console.log(this.data.task);
     this.data.list = this.taskService.deleteTask(this.data.task);
     this.eventEmitter.emitTaskDelete(this.data.list);
     this.toastr.success('Deleted Successfully');
