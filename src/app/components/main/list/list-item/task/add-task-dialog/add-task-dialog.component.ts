@@ -14,7 +14,7 @@ import { CustomErrorStateMatcherService } from 'src/app/services/forms/custom-er
 })
 export class AddTaskDialogComponent implements OnInit {
 
-  task = new Task('', new Date(), new Date(), '', 1);
+  task = new Task('', new Date(), new Date(), '', 1, '');
   titleControl = new FormControl('', [
     Validators.required
   ]);

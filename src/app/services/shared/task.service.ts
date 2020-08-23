@@ -17,6 +17,8 @@ export class TaskService {
   ) { }
 
   save(list: List, task: Task): List {
+    task.status = list.title;
+
     const lists = this.listService.findAll();
     lists.forEach(l => {
       if (l.id === list.id) {
@@ -31,6 +33,21 @@ export class TaskService {
     });
     this.listService.saveLists(lists);
     return list;
+  }
+
+  deleteTask(task: Task): List {
+    let resultList: List;
+
+    const lists = this.listService.findAll();
+    lists.forEach(l => {
+      if (l.title === task.status) {
+        l.tasks = l.tasks.filter(t => t.order !== task.order);
+        resultList = l;
+      }
+    });
+    this.listService.saveLists(lists);
+
+    return resultList;
   }
 
   toString(obj: any): string {

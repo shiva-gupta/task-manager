@@ -29,6 +29,10 @@
       <button mat-raised-button (click)="display = !display">
         Edit
       </button>
+      &nbsp;
+      <button mat-raised-button (click)="openDialog()">
+        Delete
+      </button>
     </div>
     <div class="row m-0 mt-2 pull-right" *ngIf="!display">
       <button mat-raised-button>

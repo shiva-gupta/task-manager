@@ -35,11 +35,18 @@ export class ListComponent implements OnInit {
     });
 
     this.eventEmitter.taskAdd.subscribe((list: List) => {
-      this.lists.forEach(l => {
-        if (l.id === list.id) {
-          l.tasks = list.tasks;
-        }
-      });
+      this.handleTaskEvent(list);
+    });
+
+    this.eventEmitter.taskDelete.subscribe((list: List) => {
+      this.handleTaskEvent(list);
+    });
+  }
+  handleTaskEvent(list: List): void {
+    this.lists.forEach(l => {
+      if (l.id === list.id) {
+        l.tasks = list.tasks;
+      }
     });
   }
 
