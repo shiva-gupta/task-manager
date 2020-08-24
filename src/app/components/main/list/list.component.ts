@@ -27,7 +27,11 @@ export class ListComponent implements OnInit {
 
   subscribeEvents(): void {
     this.eventEmitter.listAdd.subscribe((list: List) => {
-      this.lists = [...this.lists, list];
+      if (this.lists !== null && this.lists.length !== 0) {
+        this.lists = [...this.lists, list];
+      } else {
+        this.lists = [list];
+      }
     });
 
     this.eventEmitter.listDelete.subscribe((list: List) => {
@@ -37,7 +41,7 @@ export class ListComponent implements OnInit {
     this.eventEmitter.listUpdate.subscribe((list: List) => {
       this.lists.forEach(l => {
         if (l.id === list.id) {
-          l.title = list.title;
+          l = list;
         }
       });
     });
@@ -47,6 +51,10 @@ export class ListComponent implements OnInit {
     });
 
     this.eventEmitter.taskDelete.subscribe((list: List) => {
+      this.handleTaskEvent(list);
+    });
+
+    this.eventEmitter.taskUpdate.subscribe((list: List) => {
       this.handleTaskEvent(list);
     });
   }

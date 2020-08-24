@@ -8,6 +8,16 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
 
+  <div class="row m-0 pt-1" *ngIf="!display">
+    <div class="col-4 p-0 pt-3"><b>Title</b></div>
+    <div class="col-8 p-0">
+      <mat-form-field hideRequiredMarker>
+        <input matInput required [formControl]="titleControl"
+          [errorStateMatcher]="matcher" [(ngModel)]="title">
+      </mat-form-field>
+    </div>
+  </div>
+
   <div class="pr-0">
     <div class="row m-0 pt-1">
       <div class="col-4 p-0 pt-3"><b>Status</b></div>
@@ -78,7 +88,7 @@
       </button>
     </div>
     <div class="row m-0 mt-2 pull-right" *ngIf="!display">
-      <button mat-raised-button (click)="update()" [disabled]="!descriptionControl.valid">
+      <button mat-raised-button (click)="update()" [disabled]="!descriptionControl.valid || !titleControl.valid">
         Save
       </button>
       &nbsp;

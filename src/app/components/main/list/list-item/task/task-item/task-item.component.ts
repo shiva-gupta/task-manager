@@ -23,8 +23,12 @@ export class TaskItemComponent implements OnInit, OnChanges {
   statusList: Array<Status> = this.getStatusList();
   selectedStatus: string;
 
+  title: string;
   ecd: Date;
   description: string;
+  titleControl = new FormControl('', [
+    Validators.required
+  ]);
   ecdControl = new FormControl('', [
     Validators.required
   ]);
@@ -41,6 +45,7 @@ export class TaskItemComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
+    this.title = this.task.title;
     this.ecd = this.task.ecd;
     this.description = this.task.description;
   }
@@ -93,6 +98,7 @@ export class TaskItemComponent implements OnInit, OnChanges {
 
   cancelEdit(): void {
     this.display = !this.display;
+    this.title = this.task.title;
     this.ecd = this.task.ecd;
     this.selectedStatus = this.task.status;
     this.description = this.task.description;
@@ -101,11 +107,19 @@ export class TaskItemComponent implements OnInit, OnChanges {
   update(): void {
     if (this.description !== this.task.description
       || this.ecd !== this.task.ecd
-      || this.selectedStatus !== this.task.status) {
+      || this.selectedStatus !== this.task.status
+      || this.title !== this.task.title) {
 
+      this.task.title = this.title;
       this.task.description = this.description;
       this.task.ecd = this.ecd;
-      this.taskService.changeStatus(this.task, this.selectedStatus);
+
+      if (this.task.status !== this.selectedStatus) {
+        this.taskService.changeStatus(this.task, this.selectedStatus);
+      } else {
+        this.taskService.update(this.task);
+      }
+
       this.toastr.success('Updated Successfully');
     }
     this.display = !this.display;

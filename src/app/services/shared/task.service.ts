@@ -52,6 +52,22 @@ export class TaskService {
     return resultList;
   }
 
+  update(task: Task): List {
+    let resultList: List;
+    const lists = this.listService.findAll().map(l => {
+      if (task.status === l.title) {
+        l.tasks = l.tasks.map(t => t.order === task.order ? task : t);
+        resultList = l;
+      }
+      return l;
+    });
+    this.listService.saveLists(lists);
+
+    this.eventEmitter.emitTaskUpdate(resultList);
+
+    return resultList;
+  }
+
   changeStatus(task: Task, newStatus: string, order: number = 0): void {
     if (order === 0) {
       // delete task from current list
