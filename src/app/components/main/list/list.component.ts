@@ -34,6 +34,14 @@ export class ListComponent implements OnInit {
       this.lists = this.lists.filter(l => l.id !== list.id);
     });
 
+    this.eventEmitter.listUpdate.subscribe((list: List) => {
+      this.lists.forEach(l => {
+        if (l.id === list.id) {
+          l.title = list.title;
+        }
+      });
+    });
+
     this.eventEmitter.taskAdd.subscribe((list: List) => {
       this.handleTaskEvent(list);
     });

@@ -8,6 +8,7 @@ export class EventEmitterService {
 
   listAdd: EventEmitter<List> = new EventEmitter();
   listDelete: EventEmitter<List> = new EventEmitter();
+  listUpdate: EventEmitter<List> = new EventEmitter();
 
   taskAdd: EventEmitter<List> = new EventEmitter();
   taskDelete: EventEmitter<List> = new EventEmitter();
@@ -19,6 +20,9 @@ export class EventEmitterService {
   }
   emitListDelete(list: List): void {
     this.listDelete.emit(list);
+  }
+  emitListUpdate(list: List): void {
+    this.listUpdate.emit(list);
   }
 
   emitTaskAdd(list: List): void {

@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>{{ list.title }}</mat-card-title>
     <button mat-icon-button matTooltip="Edit List Title" class="btn-list-edit"
-      color="primary">
+      color="primary" (click)="openUpdateDialog()">
       <mat-icon>edit</mat-icon>
     </button>
     <button mat-icon-button matTooltip="Delete List" color="warn"

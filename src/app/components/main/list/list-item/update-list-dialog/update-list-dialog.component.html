@@ -1,0 +1,17 @@
+<form class="div-add-list">
+  <h3>Update List: {{ data.list.title }}</h3>
+  <mat-form-field hideRequiredMarker class="width-100">
+    <mat-label>New Title</mat-label>
+    <input matInput required [formControl]="titleControl"
+      [errorStateMatcher]="matcher">
+  </mat-form-field>
+  <div class="pull-right">
+    <button mat-raised-button (click)="updateList()" [disabled]="!titleControl.valid">
+      Update
+    </button>
+    &nbsp;
+    <button mat-raised-button (click)="closeDialog()">
+      Cancel
+    </button>
+  </div>
+</form>

@@ -68,6 +68,18 @@ export class ListService {
     this.env.storage.setItem(Constant.KEY_LIST, this.toString(lists));
   }
 
+  update(list: List, data: any): List {
+    const lists = this.findAll().map(l => {
+      if (l.id === list.id) {
+        l.title = data.title;
+        list.title = data.title;
+      }
+      return l;
+    });
+    this.saveLists(lists);
+    return list;
+  }
+
   toString(obj: any): string {
     return JSON.stringify(obj);
   }

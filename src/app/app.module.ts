@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DeleteListItemDialogComponent } from './components/main/list/list-item/delete-list-item-dialog/delete-list-item-dialog.component';
 import { AddTaskDialogComponent } from './components/main/list/list-item/task/add-task-dialog/add-task-dialog.component';
 import { DeleteTaskItemDialogComponent } from './components/main/list/list-item/task/delete-task-item-dialog/delete-task-item-dialog.component';
+import { UpdateListDialogComponent } from './components/main/list/list-item/update-list-dialog/update-list-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DeleteTaskItemDialogComponent } from './components/main/list/list-item/
     DeleteListItemDialogComponent,
     AddTaskDialogComponent,
     DeleteTaskItemDialogComponent,
+    UpdateListDialogComponent,
   ],
   imports: [
     BrowserModule,
