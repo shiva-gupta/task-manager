@@ -1,3 +1,5 @@
+import { ThemeService } from './../../services/shared/theme.service';
+import { EventEmitterService } from './../../services/shared/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  isDark = false;
+
+  constructor(
+    private eventEmitter: EventEmitterService,
+    private themeService: ThemeService
+  ) { }
 
   ngOnInit(): void {
+    this.eventEmitter.toggleTheme.subscribe((isDark: boolean) => {
+      this.isDark = isDark;
+    });
+
+    const isDark = this.themeService.getIsDark();
+    if (isDark === true || isDark === false) {
+      this.isDark = isDark;
+    }
   }
 
 }

@@ -1,13 +1,17 @@
-<div class="main">
-  <div class="main-body" fxLayout="column">
-    <div class="div-header">
-      <app-header></app-header>
-    </div>
-    <div>
-      <app-list></app-list>
-    </div>
-    <div>
-      <app-add-list></app-add-list>
+<div [ngClass]="{'dark-theme': isDark}">
+  <div class="mat-app-background">
+    <div class="main">
+      <div class="main-body" fxLayout="column">
+        <div class="div-header">
+          <app-header></app-header>
+        </div>
+        <div>
+          <app-list></app-list>
+        </div>
+        <div>
+          <app-add-list></app-add-list>
+        </div>
+      </div>
     </div>
   </div>
 </div>

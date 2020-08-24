@@ -4,6 +4,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
+import { UiSwitchModule } from 'ngx-ui-switch';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,7 +51,8 @@ import { UpdateListDialogComponent } from './components/main/list/list-item/upda
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    UiSwitchModule
   ],
   providers: [
     EnvServiceProvider

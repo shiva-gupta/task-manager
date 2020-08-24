@@ -14,6 +14,8 @@ export class EventEmitterService {
   taskDelete: EventEmitter<List> = new EventEmitter();
   taskUpdate: EventEmitter<List> = new EventEmitter();
 
+  toggleTheme: EventEmitter<boolean> = new EventEmitter();
+
   constructor() { }
 
   emitListAdd(list: List): void {
@@ -34,5 +36,9 @@ export class EventEmitterService {
   }
   emitTaskUpdate(list: List): void {
     this.taskUpdate.emit(list);
+  }
+
+  emitToggleTheme(isDark: boolean): void {
+    this.toggleTheme.emit(isDark);
   }
 }

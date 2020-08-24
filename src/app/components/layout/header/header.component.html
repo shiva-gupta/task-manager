@@ -7,4 +7,9 @@
   <span class="pl-3">
     Task Manager
   </span>
+  <ui-switch class="toggle-button"
+    defaultBgColor="white" color="#424242"
+    (change)="onToggleTheme($event)"
+    [checked]="isDark">
+  </ui-switch>
 </mat-toolbar>
