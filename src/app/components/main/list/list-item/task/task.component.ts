@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { TaskService } from './../../../../../services/shared/task.service';
 import { CommonService } from './../../../../../services/shared/common.service';
 import { Task } from './../../../../../models/task';
@@ -16,7 +17,8 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,34 @@ export class TaskComponent implements OnInit {
       this.commonService.toString(event.container.data[order - 1])
     );
 
-    this.taskService.changeStatus(task, newStatus, order);
+    if (event.previousContainer === event.container) {
+      this.taskService.changeStatus(task, newStatus, order);
+    } else {
+      const result = this.taskService.changeStatus(task, newStatus, order, this.getNewListExistingTasks(event.container.data, task));
+      if (!result) {
+        this.reverseDrag(event);
+        this.toastr.error('Target List has already Task with similar Title');
+      }
+    }
+  }
+
+  reverseDrag(event: CdkDragDrop<string[]>): void {
+    transferArrayItem(event.container.data,
+                      event.previousContainer.data,
+                      event.currentIndex,
+                      event.previousIndex);
+  }
+
+  getNewListExistingTasks(tasks: string[], selectedTask: Task): Array<Task> {
+    let tks: Array<Task> = [];
+
+    for (let i = 0; i < tasks.length; ++i) {
+      const t: Task = JSON.parse(JSON.stringify(tasks[i]));
+      if (t.status !== selectedTask.status) {
+        tks = [...tks, t];
+      }
+    }
+    return tks;
   }
 
 }

@@ -79,7 +79,9 @@ export class TaskService {
     return resultList;
   }
 
-  changeStatus(task: Task, newStatus: string, order: number = 0): void {
+  changeStatus(task: Task, newStatus: string, order: number = 0, newListTasks?: Array<Task>): boolean {
+    let result = true;
+
     if (order === 0) {
       // delete task from current list
       this.eventEmitter.emitTaskDelete(this.deleteTask(task));
@@ -92,6 +94,13 @@ export class TaskService {
         )
       );
     } else {
+      if (newListTasks !== undefined) {
+        if (newListTasks.length > 0) {
+          if (this.isPresent(task, newListTasks)) {
+            return false;
+          }
+        }
+      }
       // // delete task from current list
       this.eventEmitter.emitTaskDelete(this.deleteTask(task));
 
@@ -132,6 +141,8 @@ export class TaskService {
       });
       this.listService.saveLists(lists);
     }
+
+    return result;
   }
 
   assignOrders(list: List, initial: number): List {
