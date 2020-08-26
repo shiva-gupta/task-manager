@@ -51,10 +51,15 @@ export class AddTaskDialogComponent implements OnInit {
   }
 
   addTask(): void {
-    this.data.list = this.taskService.save(this.data.list, this.task);
-    this.toastr.success('Task Added Successfully');
-    this.eventEmitter.emitTaskAdd(this.data.list);
-    this.dialogRef.close();
+    const l = this.taskService.save(this.data.list, this.task);
+    if (l.tasks.length > this.data.list.tasks.length) {
+      this.data.list = l;
+      this.toastr.success('Task Added Successfully');
+      this.eventEmitter.emitTaskAdd(this.data.list);
+      this.dialogRef.close();
+    } else {
+      this.toastr.error('Duplicate Task Title');
+    }
   }
 
   closeDialog(): void {

@@ -18,19 +18,30 @@ export class TaskService {
     private eventEmitter: EventEmitterService
   ) { }
 
+  isPresent(task: Task, arr: Array<Task>): boolean {
+    if (task.title !== undefined || task.title !== null) {
+      return arr.filter(t => t.title.toLocaleLowerCase() === task.title.toLocaleLowerCase()).length > 0 ? true : false;
+    }
+    return false;
+  }
+
   save(list: List, task: Task): List {
     task.status = list.title;
 
     const lists = this.listService.findAll();
     lists.forEach(l => {
       if (l.id === list.id) {
-        if (l.tasks === null || l.tasks === undefined || l.tasks.length === 0) {
-          l.tasks = [task];
+        if (this.isPresent(task, l.tasks)) {
+          list = list;
         } else {
-          task.order = l.tasks[l.tasks.length - 1].order + 1;
-          l.tasks = [...l.tasks, task];
+          if (l.tasks === null || l.tasks === undefined || l.tasks.length === 0) {
+            l.tasks = [task];
+          } else {
+            task.order = l.tasks[l.tasks.length - 1].order + 1;
+            l.tasks = [...l.tasks, task];
+          }
+          list = l;
         }
-        list = l;
       }
     });
     this.listService.saveLists(lists);
