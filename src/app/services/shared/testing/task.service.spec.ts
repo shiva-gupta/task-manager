@@ -121,4 +121,12 @@ describe('TaskService', () => {
 
     expect(result).toBe(true);
   });
+
+  it('(isPresent()) should return true if task already present', () => {
+    listService.save(lists[0]);
+
+    const result = service.isPresent(lists[0].tasks[0], lists[0].tasks);
+
+    expect(result).toBeTrue();
+  });
 });
