@@ -29,14 +29,6 @@ export class ListService {
     return JSON.parse(this.env.storage.getItem(Constant.KEY_LIST));
   }
 
-  findById(id: number): List {
-    return null;
-  }
-
-  findByTitle(title: string): List {
-    return null;
-  }
-
   isPresent(list: List, arr: Array<List>): boolean {
     if (list.id !== undefined) {
       return arr.filter(l => l.id === list.id).length > 0 ? true : false;

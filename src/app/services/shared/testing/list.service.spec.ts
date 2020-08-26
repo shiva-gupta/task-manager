@@ -79,4 +79,20 @@ describe('ListService', () => {
 
     expect(list.title).toBe('list-11');
   });
+
+  it('should convert object to string', () => {
+    const str = service.toString(lists);
+    expect(str).toBe(JSON.stringify(lists));
+  });
+
+  it('should store lists', () => {
+    service.saveLists(lists);
+    const ls = service.findAll();
+
+    expect(ls).toBeDefined();
+  });
+
+  it('should delete list', () => {
+    expect(service.deleteById(1)).toBe(true);
+  });
 });
