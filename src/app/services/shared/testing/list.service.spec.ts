@@ -95,4 +95,9 @@ describe('ListService', () => {
   it('should delete list', () => {
     expect(service.deleteById(1)).toBe(true);
   });
+
+  // it('should change list order', () => {
+  //   const result = service.changeOrder(0, 1);
+  //   expect(result).toBe(true);
+  // });
 });

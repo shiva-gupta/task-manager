@@ -72,7 +72,7 @@ export class ListService {
     return list;
   }
 
-  changeOrder(prevIndex: number, currentIndex: number): void {
+  changeOrder(prevIndex: number, currentIndex: number): boolean {
     const lists = this.findAll();
     let finalList: Array<List> = [];
 
@@ -90,6 +90,7 @@ export class ListService {
     finalList[currentIndex] = selectedList;
 
     this.saveLists(finalList);
+    return true;
   }
 
   toString(obj: any): string {
