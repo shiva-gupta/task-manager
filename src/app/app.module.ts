@@ -24,6 +24,7 @@ import { DeleteListItemDialogComponent } from './components/main/list/list-item/
 import { AddTaskDialogComponent } from './components/main/list/list-item/task/add-task-dialog/add-task-dialog.component';
 import { DeleteTaskItemDialogComponent } from './components/main/list/list-item/task/delete-task-item-dialog/delete-task-item-dialog.component';
 import { UpdateListDialogComponent } from './components/main/list/list-item/update-list-dialog/update-list-dialog.component';
+import { DragComponent } from './components/test/drag/drag.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UpdateListDialogComponent } from './components/main/list/list-item/upda
     AddTaskDialogComponent,
     DeleteTaskItemDialogComponent,
     UpdateListDialogComponent,
+    DragComponent,
   ],
   imports: [
     BrowserModule,

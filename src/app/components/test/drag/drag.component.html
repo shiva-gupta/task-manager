@@ -1,0 +1,46 @@
+<div class="container jumbotron mt-5">
+  <div cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+    <div class="row m-0">
+      <!-- <div cdkDrag *ngFor="let list of lists" class="col-lg-4 col-md-6 p-2 div-app-list-item">
+        <app-list-item [list]="list"></app-list-item>
+      </div> -->
+      <!-- app-list -->
+      <div class="col-lg-4 col-md-6 p-2" *ngFor="let list of lists" cdkDrag>
+        <!-- app-list-item -->
+        <mat-card class="list-item pb-5">
+          <div class="example-handle" cdkDragHandle>
+            <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+              <path d="M0 0h24v24H0z" fill="none"></path>
+            </svg>
+          </div>
+          <mat-card-header>
+            <mat-card-title>{{ list.title }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <!-- app-task -->
+            <mat-accordion>
+              <div *ngFor="let task of list.tasks">
+                <!-- app-task-item -->
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{ task.title }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+                <!-- app-task-item -->
+              </div>
+              <div *ngIf="list.tasks.length===0">
+                <p>Add New Task ...</p>
+              </div>
+            </mat-accordion>
+            <!-- app-task -->
+          </mat-card-content>
+        </mat-card>
+        <!-- app-list-item -->
+      </div>
+      <!-- app-list -->
+    </div>
+  </div>
+</div>
