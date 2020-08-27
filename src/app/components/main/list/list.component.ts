@@ -3,6 +3,7 @@ import { ListService } from './../../../services/shared/list.service';
 import { Component, OnInit } from '@angular/core';
 import { List } from 'src/app/models/list';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',
@@ -71,5 +72,10 @@ export class ListComponent implements OnInit {
     if (this.lists != null && this.lists.length === 0) {
       this.snackBar.open('Add Your First List', 'Ok', {duration: 5000});
     }
+  }
+
+  drop(event: CdkDragDrop<string[]>): void {
+    this.listService.changeOrder(event.previousIndex, event.currentIndex);
+    moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
   }
 }

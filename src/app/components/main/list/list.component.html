@@ -1,5 +1,7 @@
-<div class="row m-0" cdkDropListGroup>
-  <div *ngFor="let list of lists" class="col-lg-4 col-md-6 p-2 div-app-list-item">
-    <app-list-item [list]="list"></app-list-item>
+<div cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+  <div class="row m-0" cdkDropListGroup>
+    <div *ngFor="let list of lists" class="col-lg-4 col-md-6 p-2 div-app-list-item">
+      <app-list-item [list]="list"></app-list-item>
+    </div>
   </div>
 </div>

@@ -72,6 +72,26 @@ export class ListService {
     return list;
   }
 
+  changeOrder(prevIndex: number, currentIndex: number): void {
+    const lists = this.findAll();
+    let finalList: Array<List> = [];
+
+    const selectedList: List = lists[prevIndex];
+
+    for (let i = 0; i < lists.length; i++) {
+      if (i !== prevIndex) {
+        finalList = [...finalList, lists[i]];
+      }
+    }
+
+    for (let i = finalList.length; i > currentIndex; i--) {
+      finalList[i] = finalList[i - 1];
+    }
+    finalList[currentIndex] = selectedList;
+
+    this.saveLists(finalList);
+  }
+
   toString(obj: any): string {
     return JSON.stringify(obj);
   }
